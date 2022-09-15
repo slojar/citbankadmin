@@ -14,4 +14,8 @@ urlpatterns = [
 
     path('local-transfer', views.local_transfer_view, name="local-transfer"),
     path('external-transfer', views.external_transfer_view, name="external-transfer"),
+
+    path('airtime', views.airtime_view, name="airtime"),
+    path('data', views.data_view, name="data"),
+    path('cable', views.cable_view, name="cable"),
 ]

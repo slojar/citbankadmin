@@ -106,7 +106,13 @@ def customer_detail_view(request, pk):
 
     if request.method == "POST":
         action = request.POST.get("action")
-        detail = adminCall.update_customer(customer_id=pk, active_status=action)
+        transfer_limit = request.POST.get("transfer_limit")
+        daily_limit = request.POST.get("daily_limit")
+        staff = request.POST.get("staff_status")
+        detail = adminCall.update_customer(
+            customer_id=pk, active_status=action, transfer_limit=transfer_limit, daily_limit=daily_limit,
+            staff_status=staff
+        )
 
     response = adminCall.get_customer_by_id(pk)
     data = dict()
@@ -117,6 +123,7 @@ def customer_detail_view(request, pk):
     data["first_name"] = response["customer_detail"]["first_name"]
     data["username"] = response["customer_detail"]["username"]
     data["email"] = response["customer_detail"]["email"]
+    data["staff"] = response["customer_detail"]["staff"]
     data["dob"] = dob
     data["customer_id"] = response["customerID"]
     data["profile_picture"] = response["image"]
@@ -124,6 +131,8 @@ def customer_detail_view(request, pk):
     data["sex"] = response["gender"]
     data["phone_no"] = response["phone_number"]
     data["status"] = response["active"]
+    data["daily_limit"] = response["daily_limit"]
+    data["transfer_limit"] = response["transfer_limit"]
     data["date_joined"] = joined
     accounts = list()
     for account in response["accounts"]:
@@ -194,3 +203,100 @@ def external_transfer_view(request):
 
     context = {"transfers": transfer_list}
     return render(request, 'home/other_transfer.html', context)
+
+
+@login_required(login_url='/login')
+def airtime_view(request):
+    # response = adminCall.get_transfer(transfer_type="others")
+    search = request.POST.get("search")
+    if request.method == "POST":
+        response = adminCall.get_bill(search=search, bill_type="airtime")
+    else:
+        response = adminCall.get_bill(bill_type="airtime")
+
+    airtime = response["detail"]["results"]
+    airtime_list = list()
+    nos = 0
+    for item in airtime:
+        nos += 1
+        data = dict()
+        date = item["created_on"][:-22]
+        data["nos"] = nos
+        data["acct_no"] = item["account_no"]
+        data["beneficiary"] = item["beneficiary"]
+        data["network"] = item["network"]
+        data["amount"] = item["amount"]
+        data["status"] = item["status"]
+        data["reference"] = item["transaction_id"] or "-"
+        data["bill_id"] = item["bill_id"] or "-"
+        data["created_on"] = date
+        airtime_list.append(data)
+
+    context = {"airtime": airtime_list}
+    return render(request, 'home/airtime.html', context)
+
+
+@login_required(login_url='/login')
+def data_view(request):
+    search = request.POST.get("search")
+    if request.method == "POST":
+        response = adminCall.get_bill(search=search, bill_type="data")
+    else:
+        response = adminCall.get_bill(bill_type="data")
+
+    data_purchase = response["detail"]["results"]
+    data_list = list()
+    nos = 0
+    for item in data_purchase:
+        nos += 1
+        data = dict()
+        date = item["created_on"][:-22]
+        data["nos"] = nos
+        data["acct_no"] = item["account_no"]
+        data["plan"] = item["plan_id"]
+        data["beneficiary"] = item["beneficiary"]
+        data["network"] = item["network"]
+        data["amount"] = item["amount"]
+        data["status"] = item["status"]
+        data["transaction_id"] = item["transaction_id"] or "-"
+        data["bill_id"] = item["bill_id"] or "-"
+        data["created_on"] = date
+        data_list.append(data)
+
+    context = {"data": data_list}
+    return render(request, 'home/data.html', context)
+
+
+@login_required(login_url='/login')
+def cable_view(request):
+    # response = adminCall.get_transfer(transfer_type="others")
+    search = request.POST.get("search")
+    if request.method == "POST":
+        response = adminCall.get_bill(search=search, bill_type="cable_tv")
+    else:
+        response = adminCall.get_bill(bill_type="cable_tv")
+
+    cable_tv = response["detail"]["results"]
+    cable_tv_list = list()
+    nos = 0
+    for item in cable_tv:
+        nos += 1
+        data = dict()
+        data["nos"] = nos
+        date = item["created_on"][:-22]
+        data["service_name"] = item["service_name"]
+        data["acct_no"] = item["account_no"]
+        data["smart_card_no"] = item["smart_card_no"]
+        data["customer_name"] = item["customer_name"]
+        data["phone_number"] = item["phone_number"]
+        data["product"] = item["product"]
+        data["amount"] = item["amount"]
+        data["months"] = item["months"]
+        data["status"] = item["status"]
+        data["transaction_id"] = item["transaction_id"] or "-"
+        data["created_on"] = date
+        cable_tv_list.append(data)
+
+    context = {"cable": cable_tv_list}
+    return render(request, 'home/cable_tv.html', context)
+

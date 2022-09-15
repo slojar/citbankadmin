@@ -14,7 +14,7 @@
                       {% if customer.profile_picture %}
                     <img src="{{ customer.profile_picture }}" alt="Admin" class="rounded-circle" width="150" height="150">
                       {% else %}
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <img src="{% static 'home/' %}img/profile_pix.png" alt="Admin" class="rounded-circle" width="150">
                       {% endif %}
                     <div class="mt-3">
                       <h4>{{ customer.last_name }} {{ customer.first_name }}</h4>
@@ -81,6 +81,48 @@
                         {{ customer.date_joined }}
                     </div>
                   </div>
+                    <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Limit per transfer</h6>
+                    </div>
+                    <div class="col-sm-5 text-secondary">
+                        &#x20A6;{{ customer.transfer_limit }}
+                    </div>
+                    <div class="col-sm-4 box_right">
+                        <form method="POST">
+                        {% csrf_token %}
+                            <div class="input-group mb-lg-auto">
+                                <input type="text" class="form-control" placeholder="set limit" name="transfer_limit">
+                                <div class="input-group-append ">
+                                    <button class="btn btn-outline-success" type="submit">Set</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+
+                    <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Daily Transfer Limit</h6>
+                    </div>
+                    <div class="col-sm-5 text-secondary">
+                        &#x20A6;{{ customer.daily_limit }}
+                    </div>
+                  <div class="col-sm-4 box_right">
+                        <form method="POST">
+                        {% csrf_token %}
+                            <div class="input-group mb-lg-auto">
+                                <input type="text" class="form-control" placeholder="set limit" name="daily_limit">
+                                <div class="input-group-append ">
+                                    <button class="btn btn-outline-success" type="submit">Set</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                  </div>
                 <hr>
                   <div class="row">
                     <div class="col-sm-3">
@@ -121,6 +163,27 @@
 
                     </div>
                   </div>
+                  <hr>
+                <hr>
+                  <div class="row">
+                      <div class="col-sm-5" style="text-align: left" >
+                      {% if customer.staff is True %}
+                      <form method="POST">
+                      {% csrf_token %}
+                        <input type="hidden" value="False" name="staff_status">
+                        <button class="btn btn-danger" type="submit">Remove user as admin</button>
+                      </form>
+                      {% else %}
+                      <form method="POST">
+                      {% csrf_token %}
+                        <input type="hidden" value="True" name="staff_status">
+                        <button class="btn btn-success ">Add user admin</button>
+                      </form>
+                      {% endif %}
+
+                    </div>
+                  </div>
+
                 </div>
               </div>
 

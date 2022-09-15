@@ -14,9 +14,6 @@ class CitAPI:
     def get_customers(cls, **kwargs):
         url = f"{base_url}/api/customer/"
 
-        search = kwargs.get("search")
-        account_status = kwargs.get("acct_status")
-
         payload = dict()
         payload["search"] = kwargs.get("search")
         payload["account_status"] = kwargs.get("acct_status")
@@ -37,7 +34,9 @@ class CitAPI:
 
         payload = dict()
         payload["account_status"] = kwargs.get("active_status")
-        payload["limit"] = kwargs.get("limit")
+        payload["daily_limit"] = kwargs.get("daily_limit")
+        payload["transfer_limit"] = kwargs.get("transfer_limit")
+        payload["staff_status"] = kwargs.get("staff_status")
 
         response = requests.request("PUT", url, data=payload).json()
         return response
@@ -48,6 +47,17 @@ class CitAPI:
 
         payload = dict()
         payload["transfer_type"] = kwargs.get("transfer_type")
+
+        response = requests.request("GET", url, params=payload).json()
+        return response
+
+    @classmethod
+    def get_bill(cls, **kwargs):
+        url = f"{base_url}/api/bill/"
+
+        payload = dict()
+        payload["bill_type"] = kwargs.get("bill_type")
+        payload["search"] = kwargs.get("search")
 
         response = requests.request("GET", url, params=payload).json()
         return response
