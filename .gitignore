@@ -9,7 +9,7 @@ __pycache__/
 .idea
 *.idea
 .idea/*
-citbank.log
+citadmin.log
 *.log
 *.sqlite
 *.sqlite3
