@@ -117,7 +117,7 @@ def customer_detail_view(request, pk):
     response = adminCall.get_customer_by_id(pk)
     data = dict()
 
-    dob = response["dob"][:-10]
+    dob = response["dob"][:-11]
     joined = response["created_on"][:-22]
     data["last_name"] = response["customer_detail"]["last_name"]
     data["first_name"] = response["customer_detail"]["first_name"]
