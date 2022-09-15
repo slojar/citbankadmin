@@ -1,0 +1,98 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="main_content_iner ">
+<div class="container-fluid plr_30 body_white_bg pt_30">
+<div>
+   {% if messages %}
+      {% for msg in messages %}
+
+         {% if msg.tags == 'success'  %}
+            <div style="color: green; font-weight: bold; text-align: center;"><h4>{{msg}}</h4></div>
+         {% endif %}
+
+         {% if msg.tags == 'error'  %}
+             <br>
+            <div style="color: red; font-weight: bold; text-align: center;">{{msg}}</div>
+         {% endif %}
+      {% endfor %}
+   {% endif %}
+</div>
+
+<div class="row justify-content-center">
+<div class="col-lg-12">
+<div class="single_element">
+<div class="quick_activity">
+<div class="row">
+<div class="col-12">
+<div class="quick_activity_wrap">
+<div class="single_quick_activity col-12">
+<h4>Total Customers</h4>
+<h3><span class="counter">{{ total_customer }}</span> </h3>
+</div>
+<div class="single_quick_activity">
+<h4>Airtime Purchase</h4>
+<h3>&#x20A6;<span class="counter">{{ airtime_purchase_total }}</span> </h3>
+</div>
+<div class="single_quick_activity">
+<h4>Data Purchase</h4>
+<h3>&#x20A6;<span class="counter">{{ data_purchase_total }}</span> </h3>
+</div>
+<div class="single_quick_activity">
+<h4>Cable TV Subscription</h4>
+<h3>&#x20A6;<span class="counter">{{ cable_tv_purchase_total }}</span> </h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-12">
+<div class="white_box mb_30">
+ <div class="box_header ">
+<div class="main-title">
+<h3 class="mb-0">Recent Customers</h3>
+</div>
+</div>
+<div class="table-responsive">
+<table class="table table-borderless">
+<thead>
+<tr>
+<th scope="col">LAST NAME</th>
+<th scope="col">FIRST NAME</th>
+<th scope="col">EMAIL ADDRESS</th>
+<th scope="col">USERNAME</th>
+<th scope="col">GENDER</th>
+{#<th scope="col">CUSTOMER ID</th>#}
+{#<th scope="col">DATE JOINED</th>#}
+{#<th scope="col">STATUS</th>#}
+</tr>
+</thead>
+<tbody>
+
+{% for customer in recent_customers %}
+<tr>
+<th scope="row">{{ customer.last_name }}</th>
+<td>{{ customer.first_name }}</td>
+<td>{{ customer.email }}</td>
+<td>{{ customer.username }}</td>
+<td>{{ customer.gender }}</td>
+{#<td>{{ customer.created_on | date:"dS F, Y" }}</td>#}
+{#<td><a class="status_btn">{{ customer.status }}</a></td>#}
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+

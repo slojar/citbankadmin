@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>CIT Admin Dashboard</title>
+<link rel="icon" href="{% static 'home/' %}img/favicon.png" type="image/png">
+<link rel="stylesheet" href="{% static 'home/' %}css/login.css" />
+</head>
+
+<body>
+<div class="wrapper">
+        <div class="">
+            <img src="{% static 'home/' %}img/logo.png" alt="" style="width: 100%">
+        </div>
+        <div class="text-center mt-4 name">
+            <h6>Admin Dashboard</h6>
+        </div>
+    <div><br></div>
+        <form class="p-3 mt-3" method="POST">
+        {% csrf_token %}
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="username" id="username" placeholder="username">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="password" placeholder="password">
+            </div>
+            <div><br></div>
+            <button class="btn mt-3">Login</button>
+        </form>
+        <div class="text-center fs-6">
+{#            <a href="#">Forget password?</a> or <a href="#">Sign up</a>#}
+        </div>
+    <div>
+                       {% if messages %}
+                  {% for msg in messages %}
+
+                     {% if msg.tags == 'success'  %}
+                        <div style="color: green; font-weight: bold; text-align: center;">{{msg}}</div>
+                     {% endif %}
+
+                     {% if msg.tags == 'error'  %}
+                         <br>
+                        <div style="color: red; font-weight: bold; text-align: center;">{{msg}}</div>
+                     {% endif %}
+                  {% endfor %}
+               {% endif %}
+    </div>
+    </div>
+</body>
+</html>

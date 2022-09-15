@@ -1,0 +1,323 @@
+{% load static %}
+
+{% block head %}
+
+    <!DOCTYPE html>
+<html lang="zxx">
+
+<!-- Mirrored from demo.dashboardpack.com/finance-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Aug 2022 11:44:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>CIT Admin Dashboard</title>
+<link rel="icon" href="{% static 'home/' %}img/favicon.png" type="image/png">
+
+<link rel="stylesheet" href="{% static 'home/' %}css/bootstrap1.min.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/themefy_icon/themify-icons.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/swiper_slider/css/swiper.min.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/select2/css/select2.min.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/niceselect/css/nice-select.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/owl_carousel/css/owl.carousel.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/gijgo/gijgo.min.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/font_awesome/css/all.min.css" />
+<link rel="stylesheet" href="{% static 'home/' %}vendors/tagsinput/tagsinput.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/datatable/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="{% static 'home/' %}vendors/datatable/css/responsive.dataTables.min.css" />
+<link rel="stylesheet" href="{% static 'home/' %}vendors/datatable/css/buttons.dataTables.min.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/text_editor/summernote-bs4.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/morris/morris.css">
+
+<link rel="stylesheet" href="{% static 'home/' %}vendors/material_icon/material-icons.css" />
+
+<link rel="stylesheet" href="{% static 'home/' %}css/metisMenu.css">
+
+<link rel="stylesheet" href="{% static 'home/' %}css/style1.css" />
+<link rel="stylesheet" href="{% static 'home/' %}css/colors/default.css" id="colorSkinCSS">
+
+</head>
+<body class="crm_body_bg">
+<nav class="sidebar">
+<div class="logo d-flex justify-content-between" style="background-color: transparent">
+<a href="index.html"><img src="{% static 'home/' %}img/logo.png" alt=""></a>
+<div class="sidebar_close_icon d-lg-none">
+<i class="ti-close"></i>
+</div>
+</div>
+<ul id="sidebar_menu">
+<li class="">
+<a class="" href="{% url 'home:admin_home' %}" aria-expanded="false">
+
+<img src="{% static 'home/' %}img/menu-icon/1.svg" alt="">
+<span>Dashboard</span>
+</a>
+</li>
+<li class="">
+<a class="" href="{% url 'home:customer' %}" aria-expanded="false">
+<img src="{% static 'home/' %}img/menu-icon/6.svg" alt="">
+<span>Customers</span>
+</a>
+<li class="">
+<a class="has-arrow" href="#" aria-expanded="false">
+<img src="{% static 'home/' %}img/menu-icon/2.svg" alt="">
+<span>Transfer</span>
+</a>
+<ul>
+<li><a href="{% url 'home:local-transfer' %}">CIT Bank</a>
+</li>
+<li><a href="{% url 'home:external-transfer' %}">Other Banks</a>
+</li>
+</ul>
+</li>
+<li class="">
+<a class="has-arrow" href="#" aria-expanded="false">
+<img src="{% static 'home/' %}img/menu-icon/3.svg" alt="">
+<span>Bill Payment</span>
+</a>
+<ul>
+<li><a href="#">Airtime</a>
+</li>
+<li><a href="#">Data</a>
+</li>
+<li><a href="#">Cable TV</a>
+</li>
+<li><a href="#">Electricity</a>
+</li>
+</ul>
+</li>
+
+{#<li class="mm-active">#}
+{#<a class="has-arrow" href="{% url 'home:transfer' %}" aria-expanded="false">#}
+{#<img src="{% static 'home/' %}img/menu-icon/2.svg" alt="">#}
+{#<span>Transfers</span>#}
+{#<li><a href="resister.html">Register</a></li>#}
+{#<li><a href="forgot_pass.html">Forgot Password</a></li>#}
+{#</a>#}
+
+{#<ul>#}
+{#<li><a href="">Customer</a></li>#}
+{#<li><a href="resister.html">Register</a></li>#}
+{#<li><a href="forgot_pass.html">Forgot Password</a></li>#}
+{#</ul>#}
+{#</li>#}
+{#<li class="">#}
+{#<a class="has-arrow" href="#" aria-expanded="false">#}
+{#<img src="{% static 'home/' %}img/menu-icon/3.svg" alt="">#}
+{#<span>Applications</span>#}
+{#</a>#}
+{#<ul>#}
+{#<li><a href="mail_box.html">Mail Box</a></li>#}
+{#<li><a href="chat.html">Chat</a></li>#}
+{#<li><a href="faq.html">FAQ</a></li>#}
+{#</ul>#}
+{#</li>#}
+{#<li class="">#}
+{#<a class="has-arrow" href="#" aria-expanded="false">#}
+{#<img src="{% static 'home/' %}img/menu-icon/4.svg" alt="">#}
+{#<span>UI Component</span>#}
+{#</a>#}
+{#<ul>#}
+{#<li><a href="#">Elements</a>#}
+{#<ul>#}
+{#<li><a href="buttons.html">Buttons</a></li>#}
+{#<li><a href="dropdown.html">Dropdowns</a></li>#}
+{# <li><a href="Badges.html">Badges</a></li>#}
+{#<li><a href="Loading_Indicators.html">Loading Indicators</a></li>#}
+{#</ul>#}
+{#</li>#}
+{#<li><a href="#">Components</a>#}
+{#<ul>#}
+{#<li><a href="notification.html">Notifications</a></li>#}
+{#<li><a href="progress.html">Progress Bar</a></li>#}
+{#<li><a href="carousel.html">Carousel</a></li>#}
+{#<li><a href="cards.html">cards</a></li>#}
+{#<li><a href="Pagination.html">Pagination</a></li>#}
+{#</ul>#}
+{#</li>#}
+{#</ul>#}
+{#</li>#}
+{#<li class="">#}
+{#<a class="has-arrow" href="#" aria-expanded="false">#}
+{#<img src="{% static 'home/' %}img/menu-icon/5.svg" alt="">#}
+{#<span>Widgets</span>#}
+{#</a>#}
+{#<ul>#}
+{#<li><a href="chart_box_1.html">Chart Boxes 1</a></li>#}
+{#<li><a href="profilebox.html">Profile Box</a></li>#}
+{#</ul>#}
+{#</li>#}
+{#<li class="">#}
+{#<a class="has-arrow" href="#" aria-expanded="false">#}
+{#<img src="{% static 'home/' %}img/menu-icon/6.svg" alt="">#}
+{#<span>Forms</span>#}
+{#</a>#}
+{#<ul>#}
+{#<li><a href="#">Elements</a>#}
+{#<ul>#}
+{#<li><a href="data_table.html">Data Tables</a></li>#}
+{#<li><a href="bootstrap_table.html">Grid Tables</a></li>#}
+{#<li><a href="datepicker.html">Date Picker</a></li>#}
+{#</ul>#}
+{#</li>#}
+{#<li><a href="#">Widgets</a>#}
+{#<ul>#}
+{#<li><a href="Input_Selects.html">Input Selects</a></li>#}
+{#<li><a href="Input_Mask.html">Input Mask</a></li>#}
+{#</ul>#}
+{#</li>#}
+{#</ul>#}
+{#</li>#}
+{#<li class="">#}
+{#<a class="has-arrow" href="#" aria-expanded="false">#}
+{#<img src="{% static 'home/' %}img/menu-icon/7.svg" alt="">#}
+{#<span>Charts</span>#}
+{#</a>#}
+{#<ul>#}
+{#<li><a href="chartjs.html">ChartJS</a></li>#}
+{#<li><a href="apex_chart.html">Apex Charts</a></li>#}
+{#<li><a href="chart_sparkline.html">chart sparkline</a></li>#}
+{#</ul>#}
+{#</li>#}
+</ul>
+</nav>
+
+    <div class="container-fluid g-0">
+<div class="row">
+<div class="col-lg-12 p-0">
+<div class="header_iner d-flex justify-content-between align-items-center">
+<div class="sidebar_icon d-lg-none">
+<i class="ti-menu"></i>
+</div>
+<div class="serach_field-area">
+<div class="search_inner">
+<form action="#">
+{#<div class="search_field">#}
+{#<input type="text" placeholder="Search here...">#}
+{#</div>#}
+{#<button type="submit"> <img src="{% static 'home/' %}img/icon/icon_search.svg" alt=""> </button>#}
+
+</form>
+</div>
+</div>
+<div class="header_right d-flex justify-content-between align-items-center">
+<div class="header_notification_warp d-flex align-items-center">
+
+{#<li>#}
+{#<a href="#"> <img src="{% static 'home/' %}img/icon/bell.svg" alt=""> </a>#}
+{#</li>#}
+{#<li>#}
+{#<a href="#"> <img src="{% static 'home/' %}img/icon/msg.svg" alt=""> </a>#}
+{#</li>#}
+</div>
+
+    {% if request.user.is_authenticated %}
+<div class="profile_info">
+<img src="{% static 'home/' %}img/admin.png" alt="#">
+<div class="profile_info_iner">
+ <p>Hello {{ user.username | title }}!</p>
+<div class="profile_info_details">
+<a href="{% url 'home:logout' %}">Log Out <i class="ti-shift-left"></i></a>
+</div>
+</div>
+</div>
+        {% endif %}
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<section class="main_content dashboard_part">
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block footer %}
+
+
+<div class="footer_part">
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-12 col-sm-12">
+<div class="footer_iner text-center">
+<p>{% now "Y" %} © CIT Microfinance Bank<a href="{% url 'home:admin_home' %}"> Admin Dashboard</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+<script src="{% static 'home/' %}js/jquery1-3.4.1.min.js"></script>
+
+<script src="{% static 'home/' %}js/popper1.min.js"></script>
+
+<script src="{% static 'home/' %}js/bootstrap1.min.js"></script>
+
+<script src="{% static 'home/' %}js/metisMenu.js"></script>
+
+<script src="{% static 'home/' %}vendors/count_up/jquery.waypoints.min.js"></script>
+
+<script src="{% static 'home/' %}vendors/chartlist/Chart.min.js"></script>
+
+<script src="{% static 'home/' %}vendors/count_up/jquery.counterup.min.js"></script>
+
+<script src="{% static 'home/' %}vendors/swiper_slider/js/swiper.min.js"></script>
+
+<script src="{% static 'home/' %}vendors/niceselect/js/jquery.nice-select.min.js"></script>
+
+<script src="{% static 'home/' %}vendors/owl_carousel/js/owl.carousel.min.js"></script>
+
+<script src="{% static 'home/' %}vendors/gijgo/gijgo.min.js"></script>
+
+<script src="{% static 'home/' %}vendors/datatable/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'home/' %}vendors/datatable/js/dataTables.responsive.min.js"></script>
+<script src="{% static 'home/' %}vendors/datatable/js/dataTables.buttons.min.js"></script>
+<script src="{% static 'home/' %}vendors/datatable/js/buttons.flash.min.js"></script>
+<script src="{% static 'home/' %}vendors/datatable/js/jszip.min.js"></script>
+<script src="{% static 'home/' %}vendors/datatable/js/pdfmake.min.js"></script>
+<script src="{% static 'home/' %}vendors/datatable/js/vfs_fonts.js"></script>
+<script src="{% static 'home/' %}vendors/datatable/js/buttons.html5.min.js"></script>
+<script src="{% static 'home/' %}vendors/datatable/js/buttons.print.min.js"></script>
+<script src="{% static 'home/' %}js/chart.min.js"></script>
+
+<script src="{% static 'home/' %}vendors/progressbar/jquery.barfiller.js"></script>
+
+<script src="{% static 'home/' %}vendors/tagsinput/tagsinput.js"></script>
+
+<script src="{% static 'home/' %}vendors/text_editor/summernote-bs4.js"></script>
+<script src="{% static 'home/' %}vendors/apex_chart/apexcharts.js"></script>
+
+<script src="{% static 'home/' %}js/custom.js"></script>
+
+<script src="{% static 'home/' %}js/active_chart.js"></script>
+<script src="{% static 'home/' %}vendors/apex_chart/radial_active.js"></script>
+<script src="{% static 'home/' %}vendors/apex_chart/stackbar.js"></script>
+<script src="{% static 'home/' %}vendors/apex_chart/area_chart.js"></script>
+
+<script src="{% static 'home/' %}vendors/apex_chart/bar_active_1.js"></script>
+<script src="{% static 'home/' %}vendors/chartjs/chartjs_active.js"></script>
+
+</body>
+
+<!-- Mirrored from demo.dashboardpack.com/finance-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Aug 2022 11:46:20 GMT -->
+</html>
+
+{% endblock %}

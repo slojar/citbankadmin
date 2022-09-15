@@ -1,0 +1,59 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="main_content_iner ">
+<div class="container-fluid plr_30 body_white_bg pt_30">
+<div class="row justify-content-center">
+<div class="col-12">
+<div class="QA_section">
+<div class="white_box_tittle list_header">
+<h4>CIT Bank Fund Transfer</h4>
+</div>
+<div class="col-lg-12">
+<div class="white_box mb_30 table-responsive">
+<table class="table table-hover">
+<thead>
+<tr>
+<th scope="col">#</th>
+<th scope="col">DATE</th>
+<th scope="col">SENDER NAME</th>
+<th scope="col">SENDER ID</th>
+<th scope="col">BENEFICIARY NAME</th>
+<th scope="col">BENEFICIARY ACCOUNT NO</th>
+<th scope="col">AMOUNT</th>
+<th scope="col">TRANS. REF</th>
+<th scope="col">STATUS</th>
+</tr>
+</thead>
+<tbody>
+{% if not transfers %}
+    <td colspan="12" style="text-align: center;"><div class="alert alert-danger">NO DATA TO LOAD</div></td>
+{% endif %}
+{% for transfer in transfers %}
+<tr>
+<th scope="row">{{ transfer.nos }}</th>
+{#<td>{{ transfer.created_on | date:"d/m/Y" }}</td>#}
+<td width="15%">{{ transfer.created_on }}</td>
+<td>{{ transfer.sender_f_name }} {{ transfer.sender_l_name }}</td>
+<td>{{ transfer.customer_id }}</td>
+<td>{{ transfer.receiver_name }}</td>
+<td>{{ transfer.receiver_acct_no }}</td>
+<td>&#x20A6;{{ transfer.amount }}</td>
+<td>{{ transfer.reference }}</td>
+<td>{{ transfer.status }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+

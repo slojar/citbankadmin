@@ -1,0 +1,136 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="container">
+    <div class="main-body">
+
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                      {% if customer.profile_picture %}
+                    <img src="{{ customer.profile_picture }}" alt="Admin" class="rounded-circle" width="150" height="150">
+                      {% else %}
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                      {% endif %}
+                    <div class="mt-3">
+                      <h4>{{ customer.last_name }} {{ customer.first_name }}</h4>
+                      <p class="text-secondary mb-1">{{ customer.email}}</p>
+                      <p class="text-muted font-size-sm">{{ customer.phone_no }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Username</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ customer.username }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Date of Birth</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ customer.dob }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">CustomerID</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ customer.customer_id }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">BVN</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ customer.bvn }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Gender</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ customer.sex }}
+                    </div>
+                  </div>
+                <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Date Joined</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ customer.date_joined }}
+                    </div>
+                  </div>
+                <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Account(s)</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {% for acct in customer.account %}
+                        {{ acct.account_no }} ({{ acct.acct_type }}),
+                        {% endfor %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Lock Status</h6>
+                    </div>
+                    <div class="col-sm-4 text-secondary">
+                        {% if customer.status is True %}
+                        Unlocked
+                        {% else %}
+                        Locked
+                        {% endif %}
+                    </div>
+                      <div class="col-sm-5" style="text-align: right" >
+                      {% if customer.status is True %}
+                      <form method="POST">
+                      {% csrf_token %}
+                        <input type="hidden" value="False" name="action">
+                        <button class="btn btn-outline-danger" type="submit">Lock Account</button>
+                      </form>
+                      {% else %}
+                      <form method="POST">
+                      {% csrf_token %}
+                        <input type="hidden" value="True" name="action">
+                        <button class="btn btn-outline-success ">Unlock Account</button>
+                      </form>
+                      {% endif %}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            </div>
+          </div>
+
+        </div>
+    </div>
+{% endblock %}
+
