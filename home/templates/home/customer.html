@@ -50,7 +50,7 @@
     {% else %}
 <td style="color: red">No</td>
 {% endif %}
-<td><button class="btn btn-outline-success" href="{% url 'home:customer-detail' customer.id %}" >View</button></td>
+<td><a style="color: white" class="btn btn-success" href="{% url 'home:customer-detail' customer.id %}" >View</a></td>
 </tr>
 {% endfor %}
 
