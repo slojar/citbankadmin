@@ -1,5 +1,6 @@
 {% extends "home/base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block body %}
 
@@ -14,7 +15,7 @@
 <form method="POST">
 {% csrf_token %}
 <div class="input-group mb-lg-auto">
-  <input type="text" class="form-control" placeholder="" name="search">
+  <input type="text" class="form-control" placeholder="search by account number, beneficiary number, status, transactionID ..." name="search">
   <div class="input-group-append ">
     <button class="btn btn-success" type="submit">Search</button>
   </div>
@@ -49,10 +50,16 @@
 <td width="15%">{{ item.created_on }}</td>
 <td>{{ item.acct_no }}</td>
 <td>{{ item.beneficiary }}</td>
-<td>{{ item.network }}</td>
-<td>&#x20A6;{{ item.amount }}</td>
+<td>{{ item.network | upper }}</td>
+<td>&#x20A6;{{ item.amount | intcomma }}</td>
 <td>{{ item.reference }}</td>
-<td>{{ item.status }}</td>
+{% if item.status == "success" %}
+<td style="color: green">{{ item.status | lower  }}</td>
+    {% elif item.status == "pending" %}
+<td style="color: orange">{{ item.status | lower }}</td>
+    {% else %}
+<td style="color: red">{{ item.status | lower }}</td>
+{% endif %}
 </tr>
 {% endfor %}
 </tbody>

@@ -152,7 +152,11 @@ def customer_detail_view(request, pk):
 
 @login_required(login_url='/login')
 def local_transfer_view(request):
-    response = adminCall.get_transfer(transfer_type="local")
+    search = request.POST.get("search")
+    if request.method == "POST":
+        response = adminCall.get_transfer(search=search, transfer_type="local")
+    else:
+        response = adminCall.get_transfer(transfer_type="local")
 
     transfers = response["results"]
     transfer_list = list()
@@ -179,14 +183,19 @@ def local_transfer_view(request):
 
 @login_required(login_url='/login')
 def external_transfer_view(request):
-    response = adminCall.get_transfer(transfer_type="others")
+    # response = adminCall.get_transfer(transfer_type="others")
+    search = request.POST.get("search")
+    if request.method == "POST":
+        response = adminCall.get_transfer(search=search, transfer_type="others")
+    else:
+        response = adminCall.get_transfer(transfer_type="others")
 
     transfers = response["results"]
     transfer_list = list()
     nos = 0
     for transfer in transfers:
-        trans_date = transfer["created_on"][:-22]
         nos += 1
+        trans_date = transfer["created_on"][:-22]
         data = dict()
         data["nos"] = nos
         data["sender_f_name"] = transfer["customer"]["first_name"]
@@ -226,7 +235,8 @@ def airtime_view(request):
         data["beneficiary"] = item["beneficiary"]
         data["network"] = item["network"]
         data["amount"] = item["amount"]
-        data["status"] = item["status"]
+        # data["status"] = item["status"]
+        data["status"] = str(item["status"]).lower()
         data["reference"] = item["transaction_id"] or "-"
         data["bill_id"] = item["bill_id"] or "-"
         data["created_on"] = date
@@ -257,7 +267,7 @@ def data_view(request):
         data["beneficiary"] = item["beneficiary"]
         data["network"] = item["network"]
         data["amount"] = item["amount"]
-        data["status"] = item["status"]
+        data["status"] = str(item["status"]).lower()
         data["transaction_id"] = item["transaction_id"] or "-"
         data["bill_id"] = item["bill_id"] or "-"
         data["created_on"] = date
@@ -292,7 +302,7 @@ def cable_view(request):
         data["product"] = item["product"]
         data["amount"] = item["amount"]
         data["months"] = item["months"]
-        data["status"] = item["status"]
+        data["status"] = str(item["status"]).lower()
         data["transaction_id"] = item["transaction_id"] or "-"
         data["created_on"] = date
         cable_tv_list.append(data)

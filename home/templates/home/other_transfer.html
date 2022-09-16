@@ -1,5 +1,6 @@
 {% extends "home/base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block body %}
 
@@ -10,6 +11,18 @@
 <div class="QA_section">
 <div class="white_box_tittle list_header">
 <h4>Other Bank Fund Transfer</h4>
+    <div class="col-lg-7 col-sm-12 col-md-6 box_right">
+<form method="POST">
+{% csrf_token %}
+<div class="input-group mb-lg-auto">
+  <input type="text" class="form-control" placeholder="search by name, customerID, account number, transaction reference ..." name="search">
+  <div class="input-group-append ">
+    <button class="btn btn-success" type="submit">Search</button>
+  </div>
+</div>
+</form>
+</div>
+
 </div>
 <div class="col-lg-12">
 <div class="white_box mb_30 table-responsive">
@@ -42,9 +55,15 @@
 <td>{{ transfer.receiver_bank }}</td>
 <td>{{ transfer.receiver_name }}</td>
 <td>{{ transfer.receiver_acct_no }}</td>
-<td>&#x20A6;{{ transfer.amount }}</td>
+<td>&#x20A6;{{ transfer.amount | intcomma }}</td>
 <td>{{ transfer.reference }}</td>
-<td>{{ transfer.status }}</td>
+    {% if transfer.status == "success" %}
+<td style="color: green">{{ transfer.status }}</td>
+    {% elif transfer.status == "pending" %}
+<td style="color: orange">{{ transfer.status }}</td>
+    {% else %}
+<td style="color: red">{{ transfer.status }}</td>
+{% endif %}
 </tr>
 {% endfor %}
 </tbody>

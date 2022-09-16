@@ -48,6 +48,7 @@ class CitAPI:
 
         payload = dict()
         payload["transfer_type"] = kwargs.get("transfer_type")
+        payload["search"] = kwargs.get("search")
 
         response = requests.request("GET", url, params=payload).json()
         return response
